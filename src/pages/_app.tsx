@@ -11,7 +11,6 @@ const theme = extendTheme({
   styles: {
     global: {
       body: {
-        color: "tomato",
         backgroundColor: "orange.50",
       },
     },
@@ -25,7 +24,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <title>めっちゃ早口でしゃべりたい</title>
       </Head>
       <ChakraProvider theme={theme}>
-        <Component {...pageProps} />;
+        <Component {...pageProps} />
       </ChakraProvider>
     </>
   );

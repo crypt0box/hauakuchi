@@ -1,5 +1,7 @@
 .main {
-  display: flex;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 100%;
   flex-direction: column;
   align-items: center;
   min-height: 100vh;
