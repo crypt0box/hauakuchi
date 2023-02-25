@@ -6,12 +6,12 @@ import Head from "next/head";
 const theme = extendTheme({
   fonts: {
     heading: "Nico Moji",
-    body: "Noto Sans JP",
   },
   styles: {
     global: {
       body: {
         backgroundColor: "orange.50",
+        color: "#000000d1",
       },
     },
   },

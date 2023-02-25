@@ -26,10 +26,6 @@ export const RadioChatType: React.FC<RadioChatTypeProps> = (props) => {
         backgroundColor="orange.50"
         cursor="pointer"
         borderRadius="md"
-        _checked={{
-          borderWidth: "1px",
-          borderColor: "blue.400",
-        }}
         _hover={{ backgroundColor: "orange.100" }}
       >
         {props.children}

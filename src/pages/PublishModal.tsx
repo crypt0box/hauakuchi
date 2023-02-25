@@ -2,8 +2,8 @@ import {
   Box,
   Button,
   Flex,
+  FormLabel,
   HStack,
-  IconButton,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -14,29 +14,48 @@ import {
   Textarea,
   useRadioGroup,
   VStack,
+  Text,
+  Icon,
 } from "@chakra-ui/react";
-import { EmojiClickData, EmojiStyle } from "emoji-picker-react";
-import dynamic from "next/dynamic";
 import { useState } from "react";
 import Image from "next/image";
 import { BALLOON_UNIFIES, FACE_UNIFIES } from "@/constants";
 import { RadioChatType } from "./RadioChatType";
-const Picker = dynamic(() => import("emoji-picker-react"), { ssr: false });
+import { CheckCircleIcon } from "@chakra-ui/icons";
 
 type PublishModalProps = Omit<ModalProps, "children">;
-type EmojiData = Pick<EmojiClickData, "unified" | "emoji">;
+
+type SubmitData = {
+  icon: string;
+  balloon: string;
+  message: string;
+};
+
+const initialSubmitData: SubmitData = {
+  icon: "1f600",
+  balloon: "1f4ac",
+  message: "",
+};
 
 export const PublishModal: React.FC<PublishModalProps> = ({
   isOpen,
   onClose,
 }) => {
+  const [submitData, setSubmitData] = useState<SubmitData>(initialSubmitData);
   const {
     getRootProps: getEmotionRootProps,
     getRadioProps: getEmotionRadioProps,
   } = useRadioGroup({
     name: "emotion",
     defaultValue: "1f600",
-    onChange: console.log,
+    onChange: (unified) => {
+      setSubmitData((prev) => {
+        return {
+          ...prev,
+          icon: unified,
+        };
+      });
+    },
   });
   const {
     getRootProps: getBalloonRootProps,
@@ -44,7 +63,14 @@ export const PublishModal: React.FC<PublishModalProps> = ({
   } = useRadioGroup({
     name: "balloon",
     defaultValue: "1f4ac",
-    onChange: console.log,
+    onChange: (unified) => {
+      setSubmitData((prev) => {
+        return {
+          ...prev,
+          balloon: unified,
+        };
+      });
+    },
   });
   const balloonGroup = getBalloonRootProps();
   const emotionGroup = getEmotionRootProps();
@@ -59,48 +85,84 @@ export const PublishModal: React.FC<PublishModalProps> = ({
       <ModalOverlay />
       <ModalContent>
         <ModalCloseButton />
-        <ModalBody mt="10" pb="0">
+        <ModalBody mt="10" pb="0" userSelect="none">
           <VStack gap="2">
-            <HStack justifyContent="center" gap="4" {...emotionGroup}>
-              {FACE_UNIFIES.map((value) => {
-                const radio = getEmotionRadioProps({ value });
-                return (
-                  <RadioChatType key={value} {...radio}>
-                    <Image
-                      src={`https://twemoji.maxcdn.com/v/latest/svg/${value}.svg`}
-                      alt={`感情アイコン_${value}`}
-                      width={32}
-                      height={32}
-                    />
-                  </RadioChatType>
-                );
-              })}
-            </HStack>
-            <HStack justifyContent="center" gap="4" {...balloonGroup}>
-              {BALLOON_UNIFIES.map((value) => {
-                const radio = getBalloonRadioProps({ value });
-                return (
-                  <RadioChatType key={value} {...radio}>
-                    <Image
-                      src={`https://twemoji.maxcdn.com/v/latest/svg/${value}.svg`}
-                      alt={`チャットアイコン_${value}`}
-                      width={32}
-                      height={32}
-                      style={{
-                        transform: value === "1f5e8" ? "scale(-1, 1)" : "none",
-                      }}
-                    />
-                  </RadioChatType>
-                );
-              })}
-            </HStack>
-            <Textarea
-              w="328px"
-              h="200px"
-              _focus={{
-                boxShadow: "none",
-              }}
-            />
+            <FormLabel m="0">
+              <Text my="1" fontWeight="bold">
+                アイコン
+              </Text>
+              <HStack justifyContent="center" gap="4" {...emotionGroup}>
+                {FACE_UNIFIES.map((value) => {
+                  const radio = getEmotionRadioProps({ value });
+                  return (
+                    <RadioChatType key={value} {...radio}>
+                      <Flex w="full" justify="center" position="relative">
+                        <Image
+                          src={`https://twemoji.maxcdn.com/v/latest/svg/${value}.svg`}
+                          alt={`感情アイコン_${value}`}
+                          width={32}
+                          height={32}
+                        />
+                        {submitData.icon === value && (
+                          <CheckCircleIcon
+                            position="absolute"
+                            top="2px"
+                            right="2px"
+                            color="teal.400"
+                          />
+                        )}
+                      </Flex>
+                    </RadioChatType>
+                  );
+                })}
+              </HStack>
+            </FormLabel>
+            <FormLabel>
+              <Text my="1" fontWeight="bold">
+                ふきだし
+              </Text>
+              <HStack justifyContent="center" gap="4" {...balloonGroup}>
+                {BALLOON_UNIFIES.map((value) => {
+                  const radio = getBalloonRadioProps({ value });
+                  return (
+                    <RadioChatType key={value} {...radio}>
+                      <Flex w="full" justify="center" position="relative">
+                        <Image
+                          src={`https://twemoji.maxcdn.com/v/latest/svg/${value}.svg`}
+                          alt={`チャットアイコン_${value}`}
+                          width={32}
+                          height={32}
+                          style={{
+                            transform:
+                              value === "1f5e8" ? "scale(-1, 1)" : "none",
+                          }}
+                        />
+                        {submitData.balloon === value && (
+                          <CheckCircleIcon
+                            position="absolute"
+                            top="2px"
+                            right="2px"
+                            color="teal.400"
+                          />
+                        )}
+                      </Flex>
+                    </RadioChatType>
+                  );
+                })}
+              </HStack>
+            </FormLabel>
+            <FormLabel>
+              <Text my="1" fontWeight="bold">
+                しゃべりたいこと
+              </Text>
+              <Textarea
+                w="328px"
+                h="200px"
+                _focus={{
+                  boxShadow: "none",
+                }}
+              />
+            </FormLabel>
           </VStack>
         </ModalBody>
         <ModalFooter justifyContent="center">
