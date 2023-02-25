@@ -100,7 +100,7 @@ export const PublishModal: React.FC<PublishModalProps> = ({
       isCentered
     >
       <ModalOverlay />
-      <ModalContent>
+      <ModalContent mx={{ base: "4" }}>
         <ModalCloseButton />
         <ModalBody mt="10" pb="0" userSelect="none">
           <VStack gap="2">

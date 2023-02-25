@@ -1,4 +1,5 @@
 import { MessageResponse } from "@/hooks/useFetchMessages";
+import { splitString } from "@/utils/splitString";
 import {
   Button,
   Flex,
@@ -12,28 +13,48 @@ import {
   useDisclosure,
   Image as ChakraImage,
   Text,
+  keyframes,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { TypeAnimation } from "react-type-animation";
 
 type ChatCardProps = {
-  message: MessageResponse;
+  data: MessageResponse;
 } & FlexProps;
 
-export const ChatCard: React.FC<ChatCardProps> = ({ message, ...rest }) => {
+export const ChatCard: React.FC<ChatCardProps> = ({ data, ...rest }) => {
+  const [isLargerThan600] = useMediaQuery("(min-width: 600px)");
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [counter, setCounter] = useState(0);
+  const [displayMessages, setDisplayMessages] = useState<string[]>([]);
+  const splitMessage = splitString(data.message, isLargerThan600 ? 24 : 18);
+
+  useEffect(() => {
+    if (!splitMessage) return;
+    setDisplayMessages((prev) => [...prev, splitMessage[counter - 1]]);
+  }, [counter]);
+
+  useEffect(() => {
+    if (isOpen) {
+      setCounter(0);
+      setDisplayMessages([]);
+    }
+  }, [isOpen]);
   return (
     <>
       <button onClick={onOpen}>
         <Flex gap="2" {...rest}>
           <Image
-            src={`https://twemoji.maxcdn.com/v/latest/svg/${message.icon}.svg`}
-            alt={`感情アイコン_${message.icon}`}
+            src={`https://twemoji.maxcdn.com/v/latest/svg/${data.icon}.svg`}
+            alt={`感情アイコン_${data.icon}`}
             width={36}
             height={36}
           />
           <Image
-            src={`https://twemoji.maxcdn.com/v/latest/svg/${message.balloon}.svg`}
-            alt={`チャットアイコン_${message.balloon}`}
+            src={`https://twemoji.maxcdn.com/v/latest/svg/${data.balloon}.svg`}
+            alt={`チャットアイコン_${data.balloon}`}
             width={36}
             height={36}
           />
@@ -41,10 +62,24 @@ export const ChatCard: React.FC<ChatCardProps> = ({ message, ...rest }) => {
       </button>
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent mx={{ base: "4" }}>
           <ModalCloseButton />
-          <ModalBody mt="8" pb="0">
-            <Text whiteSpace="pre-wrap">{message.message}</Text>
+          <ModalBody mt="8" mx="auto" pb="0" justifyContent="center">
+            {displayMessages.length !== 0 &&
+              displayMessages.map((message, index) => (
+                <Text key={index}>{message}</Text>
+              ))}
+            {splitMessage && splitMessage[counter] && (
+              <TypeAnimation
+                key={counter}
+                sequence={[
+                  splitMessage[counter],
+                  () => setCounter((prev) => prev + 1),
+                ]}
+                wrapper="p"
+                cursor={true}
+              />
+            )}
           </ModalBody>
           <ModalFooter>
             <Button

@@ -20,7 +20,7 @@ export default function Home() {
                 top={`${Math.floor(Math.random() * 80)}%`}
                 left={`${Math.floor(Math.random() * 80)}%`}
                 key={el.id}
-                message={el}
+                data={el}
               />
             ))}
         </Box>
