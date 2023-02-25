@@ -1,27 +1,45 @@
 import styles from "@/styles/Home.module.css";
 import { Title } from "./Title";
 import { Action } from "./Action";
-import { Box, useDisclosure } from "@chakra-ui/react";
-import { PublishModal } from "./PublishModal";
+import { Box } from "@chakra-ui/react";
 import { useFetchMessages } from "@/hooks/useFetchMessages";
-import { ChatCard } from "./ChatCardProps";
+import { ChatCard } from "./ChatCard";
+import { motion, useAnimationControls } from "framer-motion";
+import { useEffect } from "react";
 
 export default function Home() {
   const { res } = useFetchMessages();
+  const controls = useAnimationControls();
+
+  useEffect(() => {
+    controls.start((i) => {
+      const randInt = Math.random() * 2;
+      return {
+        opacity: [0, 1, 1, 0],
+        transition: {
+          duration: 5,
+          times: [0, 0.1, 0.9, 1],
+          delay: i * randInt,
+        },
+      };
+    });
+  }, [controls, res]);
+
   return (
     <>
       <main className={styles.main}>
         <Title />
         <Box position="relative" h="full">
           {res &&
-            res.map((el) => (
-              <ChatCard
-                position="absolute"
-                top={`${Math.floor(Math.random() * 80)}%`}
-                left={`${Math.floor(Math.random() * 80)}%`}
-                key={el.id}
-                data={el}
-              />
+            res.map((el, index) => (
+              <motion.div key={el.id} custom={index} animate={controls}>
+                <ChatCard
+                  position="absolute"
+                  top={`${Math.floor(Math.random() * 80)}%`}
+                  left={`${Math.floor(Math.random() * 80)}%`}
+                  data={el}
+                />
+              </motion.div>
             ))}
         </Box>
         <Action />
