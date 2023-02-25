@@ -6,7 +6,7 @@ export const Title = () => (
       めっちゃはやくちでしゃべりたい
     </Heading>
     <Text size="lg" textAlign="center" fontFamily="Noto Sans JP">
-      早口になっちゃうくらい
+      つい早口になっちゃうくらい
     </Text>
     <Text size="lg" textAlign="center" fontFamily="Noto Sans JP">
       しゃべりたいことを投稿しよう

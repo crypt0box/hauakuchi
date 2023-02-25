@@ -23,7 +23,7 @@ export default function App({ Component, pageProps }: AppProps) {
     defaultOptions: {
       queries: {
         retry: 0,
-        staleTime: 0,
+        staleTime: Infinity,
         cacheTime: 0,
       },
     },
