@@ -22,6 +22,7 @@ import Image from "next/image";
 import { BALLOON_UNIFIES, FACE_UNIFIES } from "@/constants";
 import { RadioChatType } from "./RadioChatType";
 import { CheckCircleIcon } from "@chakra-ui/icons";
+import { useMutateMessage } from "@/hooks/useMutateMessage";
 
 type PublishModalProps = Omit<ModalProps, "children">;
 
@@ -41,6 +42,7 @@ export const PublishModal: React.FC<PublishModalProps> = ({
   isOpen,
   onClose,
 }) => {
+  const { postMessage } = useMutateMessage();
   const [submitData, setSubmitData] = useState<SubmitData>(initialSubmitData);
   const {
     getRootProps: getEmotionRootProps,
@@ -74,6 +76,21 @@ export const PublishModal: React.FC<PublishModalProps> = ({
   });
   const balloonGroup = getBalloonRootProps();
   const emotionGroup = getEmotionRootProps();
+
+  const onChangeText = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setSubmitData((prev) => {
+      return {
+        ...prev,
+        message: e.target.value,
+      };
+    });
+  };
+
+  const onSubmit = () => {
+    const { icon, balloon, message } = submitData;
+    postMessage({ icon, balloon, message });
+    onClose();
+  };
 
   return (
     <Modal
@@ -161,6 +178,7 @@ export const PublishModal: React.FC<PublishModalProps> = ({
                 _focus={{
                   boxShadow: "none",
                 }}
+                onChange={onChangeText}
               />
             </FormLabel>
           </VStack>
@@ -170,7 +188,7 @@ export const PublishModal: React.FC<PublishModalProps> = ({
             backgroundColor="tomato"
             color="orange.50"
             _hover={{ backgroundColor: "#FF7860" }}
-            onClick={onClose}
+            onClick={onSubmit}
           >
             投稿する
           </Button>
