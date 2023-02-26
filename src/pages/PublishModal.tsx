@@ -15,7 +15,6 @@ import {
   useRadioGroup,
   VStack,
   Text,
-  Icon,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import Image from "next/image";
@@ -92,6 +91,14 @@ export const PublishModal: React.FC<PublishModalProps> = ({
     onClose();
   };
 
+  const validateMessage = (message: string) => {
+    if (message.length < 1) return true;
+    if (message.length > 801) return true;
+    return false;
+  };
+
+  const isError = validateMessage(submitData.message);
+
   return (
     <Modal
       isOpen={isOpen}
@@ -103,11 +110,13 @@ export const PublishModal: React.FC<PublishModalProps> = ({
       <ModalContent mx={{ base: "4" }}>
         <ModalCloseButton />
         <ModalBody mt="10" pb="0" userSelect="none">
-          <VStack gap="2">
-            <FormLabel m="0">
-              <Text my="1" fontWeight="bold">
-                アイコン
-              </Text>
+          <VStack>
+            <Box>
+              <FormLabel mt="0">
+                <Text color="tomato" fontWeight="bold">
+                  アイコン
+                </Text>
+              </FormLabel>
               <HStack justifyContent="center" gap="4" {...emotionGroup}>
                 {FACE_UNIFIES.map((value) => {
                   const radio = getEmotionRadioProps({ value });
@@ -133,11 +142,13 @@ export const PublishModal: React.FC<PublishModalProps> = ({
                   );
                 })}
               </HStack>
-            </FormLabel>
-            <FormLabel>
-              <Text my="1" fontWeight="bold">
-                ふきだし
-              </Text>
+            </Box>
+            <Box>
+              <FormLabel mt="2">
+                <Text color="tomato" fontWeight="bold">
+                  ふきだし
+                </Text>
+              </FormLabel>
               <HStack justifyContent="center" gap="4" {...balloonGroup}>
                 {BALLOON_UNIFIES.map((value) => {
                   const radio = getBalloonRadioProps({ value });
@@ -167,11 +178,16 @@ export const PublishModal: React.FC<PublishModalProps> = ({
                   );
                 })}
               </HStack>
-            </FormLabel>
-            <FormLabel>
-              <Text my="1" fontWeight="bold">
-                しゃべりたいこと
-              </Text>
+            </Box>
+            <Box>
+              <FormLabel mt="2">
+                <Text color="tomato" fontWeight="bold">
+                  しゃべりたいこと
+                  <Text ml="1" fontSize="12px" color="gray.500" as="span">
+                    ({submitData.message.length}/800)
+                  </Text>
+                </Text>
+              </FormLabel>
               <Textarea
                 w="328px"
                 h="200px"
@@ -180,7 +196,7 @@ export const PublishModal: React.FC<PublishModalProps> = ({
                 }}
                 onChange={onChangeText}
               />
-            </FormLabel>
+            </Box>
           </VStack>
         </ModalBody>
         <ModalFooter justifyContent="center">
@@ -189,6 +205,7 @@ export const PublishModal: React.FC<PublishModalProps> = ({
             color="orange.50"
             _hover={{ backgroundColor: "#FF7860" }}
             onClick={onSubmit}
+            isDisabled={isError}
           >
             投稿する
           </Button>
