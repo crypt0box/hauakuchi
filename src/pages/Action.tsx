@@ -22,7 +22,7 @@ export const Action: React.FC = () => {
           投稿する
         </Button>
       </Flex>
-      <PublishModal {...{ isOpen, onClose }} />
+      <PublishModal key={new Date().toISOString()} {...{ isOpen, onClose }} />
     </>
   );
 };
