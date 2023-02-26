@@ -16,30 +16,32 @@ export const Title = () => {
           cursor={false}
         />
       </Heading>
-      <Text size="lg" textAlign="center" fontFamily="Noto Sans JP">
-        {counter > 0 && (
-          <TypeAnimation
-            sequence={[
-              "つい早口になっちゃうくらい",
-              () => setCounter((prev) => prev + 1),
-            ]}
-            wrapper="span"
-            cursor={false}
-          />
-        )}
-      </Text>
-      <Text size="lg" textAlign="center" fontFamily="Noto Sans JP">
-        {counter > 1 && (
-          <TypeAnimation
-            sequence={[
-              "しゃべりたいことを投稿しよう",
-              () => setCounter((prev) => prev + 1),
-            ]}
-            wrapper="span"
-            cursor={false}
-          />
-        )}
-      </Text>
+      <Box h="48px">
+        <Text size="lg" textAlign="center" fontFamily="Noto Sans JP">
+          {counter > 0 && (
+            <TypeAnimation
+              sequence={[
+                "つい早口になっちゃうくらい",
+                () => setCounter((prev) => prev + 1),
+              ]}
+              wrapper="span"
+              cursor={false}
+            />
+          )}
+        </Text>
+        <Text size="lg" textAlign="center" fontFamily="Noto Sans JP">
+          {counter > 1 && (
+            <TypeAnimation
+              sequence={[
+                "しゃべりたいことを投稿しよう",
+                () => setCounter((prev) => prev + 1),
+              ]}
+              wrapper="span"
+              cursor={false}
+            />
+          )}
+        </Text>
+      </Box>
     </Box>
   );
 };
