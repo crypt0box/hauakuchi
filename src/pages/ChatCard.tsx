@@ -57,6 +57,9 @@ export const ChatCard: React.FC<ChatCardProps> = ({ data, ...rest }) => {
             alt={`チャットアイコン_${data.balloon}`}
             width={36}
             height={36}
+            style={{
+              transform: data.balloon === "1f5e8" ? "scale(-1, 1)" : "none",
+            }}
           />
         </Flex>
       </button>
