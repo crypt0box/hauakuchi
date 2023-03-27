@@ -5,11 +5,14 @@ import { Box } from "@chakra-ui/react";
 import { useFetchMessages } from "@/hooks/useFetchMessages";
 import { ChatCard } from "./ChatCard";
 import { motion, useAnimationControls } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
+import { useAtomValue } from "jotai/react";
+import { messageAtom } from "@/atoms";
 
 export default function Home() {
   const { res } = useFetchMessages();
   const controls = useAnimationControls();
+  const newMessage = useAtomValue(messageAtom);
 
   const startAnimation = () =>
     controls.start((i) => {
@@ -42,6 +45,7 @@ export default function Home() {
                 onAnimationComplete={() =>
                   index === res.length - 1 && startAnimation()
                 }
+                style={{ height: "1px" }}
               >
                 <ChatCard
                   position="absolute"
@@ -51,6 +55,26 @@ export default function Home() {
                 />
               </motion.div>
             ))}
+          {newMessage && (
+            <motion.div
+              key={new Date().toISOString()}
+              animate={{
+                opacity: [0, 1, 1, 0],
+                transition: {
+                  duration: 5,
+                  times: [0, 0.1, 0.9, 1],
+                },
+              }}
+              style={{ height: "1px" }}
+            >
+              <ChatCard
+                position="absolute"
+                top={`${Math.floor(Math.random() * 80)}%`}
+                left={`${Math.floor(Math.random() * 80)}%`}
+                data={structuredClone(newMessage)}
+              />
+            </motion.div>
+          )}
         </Box>
         <Action />
       </main>
