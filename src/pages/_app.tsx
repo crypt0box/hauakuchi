@@ -32,7 +32,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>めっちゃ早口でしゃべりたい</title>
+        <title>めっちゃはやくちでしゃべりたい</title>
       </Head>
       <ChakraProvider theme={theme}>
         <QueryClientProvider client={queryClient}>
