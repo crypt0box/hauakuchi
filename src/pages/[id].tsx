@@ -39,7 +39,7 @@ export default function MessageModal({ data }: { data: MessageResponse }) {
       <Head>
         <meta
           property="og:url"
-          content={`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/og?title=${data.message}`}
+          content={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${data.id}`}
         />
         <meta
           property="og:image"
