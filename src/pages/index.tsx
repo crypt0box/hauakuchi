@@ -7,12 +7,12 @@ import { ChatCard } from "../components/ChatCard";
 import { motion, useAnimationControls } from "framer-motion";
 import { useEffect } from "react";
 import { useAtomValue } from "jotai/react";
-import { messageAtom } from "@/atoms";
+import { newMessageAtom } from "@/atoms";
 
 export default function Home() {
   const { res } = useFetchMessages();
   const controls = useAnimationControls();
-  const newMessage = useAtomValue(messageAtom);
+  const newMessage = useAtomValue(newMessageAtom);
 
   const startAnimation = () =>
     controls.start((i) => {

@@ -22,8 +22,8 @@ import { BALLOON_UNIFIES, FACE_UNIFIES } from "@/constants";
 import { RadioChatType } from "./RadioChatType";
 import { CheckCircleIcon } from "@chakra-ui/icons";
 import { useMutateMessage } from "@/hooks/useMutateMessage";
-import { messageAtom } from "@/atoms";
 import { useSetAtom } from "jotai";
+import { newMessageAtom } from "@/atoms";
 
 type PublishModalProps = Omit<ModalProps, "children">;
 
@@ -43,7 +43,7 @@ export const PublishModal: React.FC<PublishModalProps> = ({
   isOpen,
   onClose,
 }) => {
-  const setMessage = useSetAtom(messageAtom);
+  const setMessage = useSetAtom(newMessageAtom);
   const { postMessage } = useMutateMessage();
   const [submitData, setSubmitData] = useState<SubmitData>(initialSubmitData);
   const {

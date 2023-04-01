@@ -1,5 +1,3 @@
-import { ogpTitleAtom } from "@/atoms";
-import { useAtomValue } from "jotai";
 import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document() {

@@ -3,6 +3,7 @@ import type { AppProps } from "next/app";
 import { extendTheme } from "@chakra-ui/react";
 import Head from "next/head";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { Provider } from "jotai";
 
 const theme = extendTheme({
   fonts: {
@@ -35,7 +36,9 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <ChakraProvider theme={theme}>
         <QueryClientProvider client={queryClient}>
-          <Component {...pageProps} />
+          <Provider>
+            <Component {...pageProps} />
+          </Provider>
         </QueryClientProvider>
       </ChakraProvider>
     </>

@@ -6,15 +6,9 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method === "GET") {
-    const response = await serverAxios.get<MessageResponse[]>(
-      "/rest/v1/messages?order=created_at.desc&limit=50&select=*"
-    );
-    const data = response.data;
-    res.status(200).json(data);
-  }
-  if (req.method === "POST") {
-    const response = await serverAxios.post("/rest/v1/messages", req.body);
-    res.status(200).json(response.data);
-  }
+  const response = await serverAxios.get<MessageResponse[]>(
+    `/rest/v1/messages?select=*&id=eq.${req.query.id}`
+  );
+  const data = response.data[0];
+  res.status(200).json(data);
 }
