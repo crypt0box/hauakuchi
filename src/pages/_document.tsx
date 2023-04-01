@@ -12,10 +12,10 @@ export default function Document() {
           property="og:description"
           content="つい早口になっちゃうくらいしゃべりたいことを投稿しよう"
         />
-        <meta
+        {/* <meta
           property="og:image"
           content="https://hauakuchi.vercel.app/staticOgp.svg"
-        />
+        /> */}
         <meta name="twitter:card" content="summary_large_image" />
         <link
           rel="icon"
