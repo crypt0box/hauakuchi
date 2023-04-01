@@ -1,3 +1,4 @@
+import { ogpTitleAtom } from "@/atoms";
 import { MessageResponse } from "@/hooks/useFetchMessages";
 import { splitString } from "@/utils/splitString";
 import {
@@ -16,6 +17,7 @@ import {
   useMediaQuery,
   Box,
 } from "@chakra-ui/react";
+import { useSetAtom } from "jotai";
 import Head from "next/head";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -31,6 +33,7 @@ export const ChatCard: React.FC<ChatCardProps> = ({ data, ...rest }) => {
   const [counter, setCounter] = useState(0);
   const [displayMessages, setDisplayMessages] = useState<string[]>([]);
   const splitMessage = splitString(data.message, isLargerThan600 ? 23 : 18);
+  const setOgpTitle = useSetAtom(ogpTitleAtom);
 
   useEffect(() => {
     if (!splitMessage) return;
@@ -41,8 +44,10 @@ export const ChatCard: React.FC<ChatCardProps> = ({ data, ...rest }) => {
     if (isOpen) {
       setCounter(0);
       setDisplayMessages([]);
+      setOgpTitle(data.message);
     }
-  }, [isOpen]);
+  }, [isOpen, setOgpTitle, data.message]);
+
   return (
     <>
       <button onClick={onOpen}>
