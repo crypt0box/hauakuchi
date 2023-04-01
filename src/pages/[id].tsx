@@ -43,7 +43,9 @@ export default function MessageModal({ data }: { data: MessageResponse }) {
         />
         <meta
           property="og:image"
-          content={`${process.env.NEXT_PUBLIC_OGP_BASEURL}/api/og?title=${data.message}`}
+          content={`${
+            process.env.NEXT_PUBLIC_OGP_BASEURL
+          }/api/og?title=${encodeURIComponent(data.message)}`}
         />
       </Head>
       <Modal isOpen={true} onClose={onCloseDialog}>
