@@ -1,9 +1,9 @@
 import styles from "@/styles/Home.module.css";
-import { Title } from "./Title";
-import { Action } from "./Action";
+import { Title } from "../components/Title";
+import { Action } from "../components/Action";
 import { Box } from "@chakra-ui/react";
 import { useFetchMessages } from "@/hooks/useFetchMessages";
-import { ChatCard } from "./ChatCard";
+import { ChatCard } from "../components/ChatCard";
 import { motion, useAnimationControls } from "framer-motion";
 import { useEffect } from "react";
 import { useAtomValue } from "jotai/react";
