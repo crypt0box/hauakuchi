@@ -16,6 +16,7 @@ import {
   useMediaQuery,
   Box,
 } from "@chakra-ui/react";
+import Head from "next/head";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
@@ -44,6 +45,12 @@ export const ChatCard: React.FC<ChatCardProps> = ({ data, ...rest }) => {
   }, [isOpen]);
   return (
     <>
+      <Head>
+        <meta
+          property="og:image"
+          content={`${process.env.NEXT_PUBLIC_OGP_BASEURL}/api/og?title=${data.message}`}
+        />
+      </Head>
       <button onClick={onOpen}>
         <Flex gap="2" {...rest}>
           <Image
