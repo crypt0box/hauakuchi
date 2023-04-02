@@ -8,6 +8,7 @@ import {
   Text,
   useMediaQuery,
   Box,
+  Grid,
 } from "@chakra-ui/react";
 import { useSetAtom } from "jotai";
 import { GetServerSideProps } from "next";
@@ -46,8 +47,28 @@ export default function MessagePage({ data }: { data: MessageResponse }) {
           }/api/og?title=${encodeURIComponent(data.message)}`}
         />
       </Head>
-      <Flex minH="100vh" justifyContent="center" alignItems="center">
-        <Box w="full" maxW="440" px="4">
+      <Box minH="100vh">
+        <Box
+          w="full"
+          maxW="440"
+          maxH="calc(100vh - 140px)"
+          pt="4"
+          px="4"
+          mx="auto"
+          overflowY="scroll"
+          css={
+            isLargerThan600 && {
+              "&::-webkit-scrollbar": {
+                width: "10px",
+              },
+              /* スクロールバーのつまみ（スクロールバーコントロール）を設定 */
+              "&::-webkit-scrollbar-thumb": {
+                backgroundColor: "rgba(0, 0, 0, 0.3)",
+                borderRadius: "10px",
+              },
+            }
+          }
+        >
           <Flex mb="4" justifyContent="center">
             <Image
               src={`https://twemoji.maxcdn.com/v/latest/svg/${data.icon}.svg`}
@@ -99,6 +120,8 @@ export default function MessagePage({ data }: { data: MessageResponse }) {
               />
             )}
           </Box>
+        </Box>
+        <Grid position="absolute" bottom="0" w="full" justifyContent="center">
           <Button
             colorScheme="twitter"
             w="full"
@@ -113,12 +136,13 @@ export default function MessagePage({ data }: { data: MessageResponse }) {
             color="orange.50"
             _hover={{ backgroundColor: "#FF7860" }}
             w="full"
+            mb="8"
             onClick={gotoHome}
           >
             戻る
           </Button>
-        </Box>
-      </Flex>
+        </Grid>
+      </Box>
     </>
   );
 }
