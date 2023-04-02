@@ -36,7 +36,7 @@ export default function MessagePage({ data }: { data: MessageResponse }) {
 
   return (
     <>
-      <Head>
+      {/* <Head>
         <meta
           property="og:url"
           content={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${data.id}`}
@@ -47,7 +47,7 @@ export default function MessagePage({ data }: { data: MessageResponse }) {
             process.env.NEXT_PUBLIC_API_BASE_URL
           }/api/og?title=${encodeURIComponent(data.message)}`}
         />
-      </Head>
+      </Head> */}
       <Box minH="100vh">
         <Box
           w="full"

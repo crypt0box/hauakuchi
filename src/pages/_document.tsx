@@ -15,8 +15,6 @@ export default function Document() {
           property="og:image"
           content={`${process.env.NEXT_PUBLIC_API_BASE_URL}/hayakuchi.png`}
         />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content={`${process.env.NEXT_PUBLIC_API_BASE_URL}/hayakuchi.png`} />
         <link
           rel="icon"
           href="https://twemoji.maxcdn.com/v/latest/svg/1f913.svg"
