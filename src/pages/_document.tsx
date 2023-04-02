@@ -13,7 +13,7 @@ export default function Document() {
         />
         <meta
           property="og:image"
-          content="https://hauakuchi.vercel.app/staticOgp.svg"
+          content={`${process.env.NEXT_PUBLIC_API_BASE_URL}/hayakuchi.png`}
         />
         <link
           rel="icon"
