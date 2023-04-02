@@ -1,15 +1,19 @@
 import styles from "@/styles/Home.module.css";
 import { Title } from "../components/Title";
 import { Action } from "../components/Action";
-import { Box } from "@chakra-ui/react";
+import { Box, Flex, Link, Text } from "@chakra-ui/react";
 import { useFetchMessages } from "@/hooks/useFetchMessages";
 import { ChatCard } from "../components/ChatCard";
 import { motion, useAnimationControls } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAtomValue } from "jotai/react";
 import { newMessageAtom } from "@/atoms";
+import { GuidelineModal } from "@/components/GuidelineModal";
+import { PrivacyPolicyModal } from "@/components/PrivacyPolicyModal";
 
 export default function Home() {
+  const [isGuidelineOpen, setIsGuidelineOpen] = useState(false);
+  const [isPrivacyPolicyOpen, setIsPrivacyPolicyOpen] = useState(false);
   const { res } = useFetchMessages();
   const controls = useAnimationControls();
   const newMessage = useAtomValue(newMessageAtom);
@@ -77,6 +81,39 @@ export default function Home() {
           )}
         </Box>
         <Action />
+        <Flex
+          w="full"
+          py={1}
+          justify="center"
+          gap={2}
+          bgColor="gray.300"
+          fontSize={14}
+        >
+          <Link color="blue.500" onClick={() => setIsGuidelineOpen(true)}>
+            利用規約
+          </Link>
+          <Link color="blue.500" onClick={() => setIsPrivacyPolicyOpen(true)}>
+            プライバシーポリシー
+          </Link>
+          <Text>
+            ©2023
+            <Link
+              color="blue.500"
+              href="https://twitter.com/cryptooooon"
+              isExternal
+            >
+              @cryptobox
+            </Link>
+          </Text>
+          <GuidelineModal
+            isOpen={isGuidelineOpen}
+            onClose={() => setIsGuidelineOpen(false)}
+          />
+          <PrivacyPolicyModal
+            isOpen={isPrivacyPolicyOpen}
+            onClose={() => setIsPrivacyPolicyOpen(false)}
+          />
+        </Flex>
       </main>
     </>
   );
