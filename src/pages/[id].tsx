@@ -15,7 +15,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
 
-export default function MessageModal({ data }: { data: MessageResponse }) {
+export default function MessagePage({ data }: { data: MessageResponse }) {
   const router = useRouter();
   const [isLargerThan600] = useMediaQuery("(min-width: 600px)");
   const [counter, setCounter] = useState(0);
@@ -88,6 +88,7 @@ export default function MessageModal({ data }: { data: MessageResponse }) {
                 ]}
                 wrapper="p"
                 cursor={true}
+                speed={65}
                 style={{
                   textAlign: "center",
                 }}

@@ -14,6 +14,8 @@ export const Title = () => {
           ]}
           wrapper="span"
           cursor={false}
+          speed={65}
+          style={{ userSelect: "none" }}
         />
       </Heading>
       <Box h="48px">
@@ -26,6 +28,7 @@ export const Title = () => {
               ]}
               wrapper="span"
               cursor={false}
+              speed={65}
             />
           )}
         </Text>
@@ -38,6 +41,7 @@ export const Title = () => {
               ]}
               wrapper="span"
               cursor={false}
+              speed={65}
             />
           )}
         </Text>
