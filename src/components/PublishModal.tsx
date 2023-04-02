@@ -34,7 +34,7 @@ type SubmitData = {
 };
 
 const initialSubmitData: SubmitData = {
-  icon: "1f600",
+  icon: "1f913",
   balloon: "1f4ac",
   message: "",
 };
@@ -51,7 +51,7 @@ export const PublishModal: React.FC<PublishModalProps> = ({
     getRadioProps: getEmotionRadioProps,
   } = useRadioGroup({
     name: "emotion",
-    defaultValue: "1f600",
+    defaultValue: "1f913",
     onChange: (unified) => {
       setSubmitData((prev) => {
         return {

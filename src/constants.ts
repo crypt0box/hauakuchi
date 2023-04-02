@@ -24,8 +24,8 @@ const BALLOONS = [
 const FACES = [
   {
     name: "grinning",
-    emoji: "😀",
-    unified: "1f600",
+    emoji: "🤓",
+    unified: "1f913",
   },
   {
     name: "laughing",
