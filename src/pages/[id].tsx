@@ -44,7 +44,7 @@ export default function MessagePage({ data }: { data: MessageResponse }) {
         <meta
           property="og:image"
           content={`${
-            process.env.NEXT_PUBLIC_OGP_BASEURL
+            process.env.NEXT_PUBLIC_API_BASE_URL
           }/api/og?title=${encodeURIComponent(data.message)}`}
         />
       </Head>
