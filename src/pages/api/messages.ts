@@ -1,5 +1,6 @@
 import { MessageResponse } from "@/hooks/useFetchMessages";
 import { serverAxios } from "@/lib/axios";
+import { supabase } from "@/lib/supabase";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -14,7 +15,9 @@ export default async function handler(
     res.status(200).json(data);
   }
   if (req.method === "POST") {
-    const response = await serverAxios.post("/rest/v1/messages", req.body);
-    res.status(200).json(response.data);
+    const response = await supabase.from("messages").insert(req.body).select();
+    const data = response.data?.[0];
+    console.log("🚀 ~ file: messages.ts:20 ~ data:", data);
+    res.status(200).json(data);
   }
 }

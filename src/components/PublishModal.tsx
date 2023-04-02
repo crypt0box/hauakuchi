@@ -88,15 +88,15 @@ export const PublishModal: React.FC<PublishModalProps> = ({
     });
   };
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     const { icon, balloon, message } = submitData;
+    const res = await postMessage({ icon, balloon, message });
     const newMessage = structuredClone({
       ...submitData,
-      id: "0",
+      id: res.data.id,
       created_at: new Date().toString(),
     });
     setMessage(newMessage);
-    postMessage({ icon, balloon, message });
     onClose();
   };
 
