@@ -9,7 +9,7 @@ export default async function handler(
 ) {
   if (req.method === "GET") {
     const response = await serverAxios.get<MessageResponse[]>(
-      "/rest/v1/messages?order=created_at.desc&limit=50&select=*"
+      "/rest/v1/messages?order=created_at.desc&limit=20&select=*"
     );
     const data = response.data;
     res.status(200).json(data);
