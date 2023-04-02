@@ -124,8 +124,9 @@ export default function MessagePage({ data }: { data: MessageResponse }) {
         <Grid position="absolute" bottom="0" w="full" justifyContent="center">
           <Button
             colorScheme="twitter"
-            w="full"
             mb="2"
+            w="calc(100vw * 0.9)"
+            maxW="400"
             onClick={gotoHome}
             leftIcon={<ChakraImage w="6" h="6" src="/twitter.svg" />}
           >
@@ -135,7 +136,6 @@ export default function MessagePage({ data }: { data: MessageResponse }) {
             bgColor="tomato"
             color="orange.50"
             _hover={{ backgroundColor: "#FF7860" }}
-            w="full"
             mb="8"
             onClick={gotoHome}
           >
