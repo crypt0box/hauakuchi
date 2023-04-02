@@ -71,7 +71,7 @@ export default function Home() {
                 position="absolute"
                 top={`${Math.floor(Math.random() * 80)}%`}
                 left={`${Math.floor(Math.random() * 80)}%`}
-                data={structuredClone(newMessage)}
+                data={newMessage}
               />
             </motion.div>
           )}

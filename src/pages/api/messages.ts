@@ -17,7 +17,6 @@ export default async function handler(
   if (req.method === "POST") {
     const response = await supabase.from("messages").insert(req.body).select();
     const data = response.data?.[0];
-    console.log("🚀 ~ file: messages.ts:20 ~ data:", data);
     res.status(200).json(data);
   }
 }

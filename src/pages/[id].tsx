@@ -1,3 +1,4 @@
+import { newMessageAtom } from "@/atoms";
 import { MessageResponse } from "@/hooks/useFetchMessages";
 import { splitString } from "@/utils/splitString";
 import {
@@ -8,6 +9,7 @@ import {
   useMediaQuery,
   Box,
 } from "@chakra-ui/react";
+import { useSetAtom } from "jotai";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import Image from "next/image";
@@ -22,8 +24,10 @@ export default function MessagePage({ data }: { data: MessageResponse }) {
   const [displayMessages, setDisplayMessages] = useState<string[]>([]);
   const splitMessage = splitString(data.message, isLargerThan600 ? 23 : 18);
   const gotoHome = () => router.push("/");
+  const setMessage = useSetAtom(newMessageAtom);
 
   useEffect(() => {
+    setMessage(undefined);
     if (!splitMessage) return;
     setDisplayMessages((prev) => [...prev, splitMessage[counter - 1]]);
   }, [counter]);
