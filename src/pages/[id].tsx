@@ -1,4 +1,5 @@
 import { newMessageAtom } from "@/atoms";
+import { TwitterIntentTweet } from "@/components/TwitterIntentTweet ";
 import { MessageResponse } from "@/hooks/useFetchMessages";
 import { splitString } from "@/utils/splitString";
 import {
@@ -123,6 +124,9 @@ export default function MessagePage({ data }: { data: MessageResponse }) {
         </Box>
         <Grid position="absolute" bottom="0" w="full" justifyContent="center">
           <Button
+            as={TwitterIntentTweet}
+            url={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${data.id}`}
+            hashtags={["めっちゃはやくちでしゃりべたい"]}
             colorScheme="twitter"
             mb="2"
             w="calc(100vw * 0.9)"
