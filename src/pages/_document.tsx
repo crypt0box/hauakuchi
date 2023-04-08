@@ -12,10 +12,6 @@ export default function Document() {
           property="og:description"
           content="つい早口になっちゃうくらいしゃべりたいことを投稿しよう"
         />
-        <meta
-          property="og:image"
-          content={`${process.env.NEXT_PUBLIC_API_BASE_URL}/hayakuchi.png`}
-        />
         <link
           rel="icon"
           href="https://twemoji.maxcdn.com/v/latest/svg/1f913.svg"

@@ -10,6 +10,7 @@ import { useAtomValue } from "jotai/react";
 import { newMessageAtom } from "@/atoms";
 import { GuidelineModal } from "@/components/GuidelineModal";
 import { PrivacyPolicyModal } from "@/components/PrivacyPolicyModal";
+import Head from "next/head";
 
 export default function Home() {
   const [isGuidelineOpen, setIsGuidelineOpen] = useState(false);
@@ -37,6 +38,12 @@ export default function Home() {
 
   return (
     <>
+      <Head>
+        <meta
+          property="og:image"
+          content={`${process.env.NEXT_PUBLIC_API_BASE_URL}/hayakuchi.png`}
+        />
+      </Head>
       <main className={styles.main}>
         <Title />
         <Box position="relative" h="full">
