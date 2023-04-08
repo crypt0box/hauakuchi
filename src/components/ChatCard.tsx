@@ -21,6 +21,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
+import { TwitterIntentTweet } from "./TwitterIntentTweet ";
 
 type ChatCardProps = {
   data: MessageResponse;
@@ -114,6 +115,7 @@ export const ChatCard: React.FC<ChatCardProps> = ({ data, ...rest }) => {
                   ]}
                   wrapper="p"
                   cursor={true}
+                  speed={65}
                   style={{
                     textAlign: "center",
                   }}
@@ -122,14 +124,18 @@ export const ChatCard: React.FC<ChatCardProps> = ({ data, ...rest }) => {
             </Box>
           </ModalBody>
           <ModalFooter>
-            <Button
-              colorScheme="twitter"
-              w="full"
-              onClick={onClose}
-              leftIcon={<ChakraImage w="6" h="6" src="/twitter.svg" />}
-            >
-              Twitterでシェアする
-            </Button>
+          <Button
+            as={TwitterIntentTweet}
+            url={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${data.id}`}
+            hashtags={["めっちゃはやくちでしゃりべたい"]}
+            colorScheme="twitter"
+            mb="2"
+            w="calc(100vw * 0.9)"
+            maxW="400"
+            leftIcon={<ChakraImage w="6" h="6" src="/twitter.svg" />}
+          >
+            Twitterでシェアする
+          </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

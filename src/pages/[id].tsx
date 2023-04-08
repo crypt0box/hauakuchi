@@ -124,23 +124,12 @@ export default function MessagePage({ data }: { data: MessageResponse }) {
         </Box>
         <Grid position="absolute" bottom="0" w="full" justifyContent="center">
           <Button
-            as={TwitterIntentTweet}
-            url={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${data.id}`}
-            hashtags={["めっちゃはやくちでしゃりべたい"]}
-            colorScheme="twitter"
-            mb="2"
-            w="calc(100vw * 0.9)"
-            maxW="400"
-            onClick={gotoHome}
-            leftIcon={<ChakraImage w="6" h="6" src="/twitter.svg" />}
-          >
-            Twitterでシェアする
-          </Button>
-          <Button
             bgColor="tomato"
             color="orange.50"
             _hover={{ backgroundColor: "#FF7860" }}
             mb="8"
+            w="calc(100vw * 0.9)"
+            maxW="400"
             onClick={gotoHome}
           >
             戻る
