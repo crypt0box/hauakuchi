@@ -5,16 +5,12 @@ import { Box, Flex, Link, Text } from "@chakra-ui/react";
 import { useFetchMessages } from "@/hooks/useFetchMessages";
 import { ChatCard } from "../components/ChatCard";
 import { motion, useAnimationControls } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAtomValue } from "jotai/react";
 import { newMessageAtom } from "@/atoms";
-import { GuidelineModal } from "@/components/GuidelineModal";
-import { PrivacyPolicyModal } from "@/components/PrivacyPolicyModal";
 import Head from "next/head";
 
 export default function Home() {
-  const [isGuidelineOpen, setIsGuidelineOpen] = useState(false);
-  const [isPrivacyPolicyOpen, setIsPrivacyPolicyOpen] = useState(false);
   const { res } = useFetchMessages();
   const controls = useAnimationControls();
   const newMessage = useAtomValue(newMessageAtom);
@@ -96,30 +92,21 @@ export default function Home() {
           bgColor="gray.300"
           fontSize={14}
         >
-          <Link color="blue.500" onClick={() => setIsGuidelineOpen(true)}>
-            利用規約
+          <Text>©2023</Text>
+          <Link
+            color="blue.500"
+            href="https://twitter.com/cryptooooon"
+            isExternal
+          >
+            @cryptobox
           </Link>
-          <Link color="blue.500" onClick={() => setIsPrivacyPolicyOpen(true)}>
-            プライバシーポリシー
+          <Link
+            color="blue.500"
+            href="https://docs.google.com/forms/d/e/1FAIpQLSfYg_D3axY6FS-eOi5apKakwcrxKX9sC6RN7oEKieXaaJahDA/viewform?usp=pp_url"
+            isExternal
+          >
+            お問い合わせ
           </Link>
-          <Text>
-            ©2023
-            <Link
-              color="blue.500"
-              href="https://twitter.com/cryptooooon"
-              isExternal
-            >
-              @cryptobox
-            </Link>
-          </Text>
-          <GuidelineModal
-            isOpen={isGuidelineOpen}
-            onClose={() => setIsGuidelineOpen(false)}
-          />
-          <PrivacyPolicyModal
-            isOpen={isPrivacyPolicyOpen}
-            onClose={() => setIsPrivacyPolicyOpen(false)}
-          />
         </Flex>
       </main>
     </>
