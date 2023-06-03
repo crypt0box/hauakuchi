@@ -13,8 +13,8 @@ const redis = new Redis({
 
 const ratelimit = new Ratelimit({
   redis: redis,
-  // 10分間に20回までリクエストを受け付ける
-  limiter: Ratelimit.slidingWindow(2, "10 m"),
+  // 10分間に5回までリクエストを受け付ける
+  limiter: Ratelimit.slidingWindow(5, "10 m"),
   analytics: true,
   /**
    * Optional prefix for the keys used in redis. This is useful if you want to share a redis

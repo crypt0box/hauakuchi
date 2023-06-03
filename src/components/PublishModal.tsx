@@ -15,6 +15,7 @@ import {
   useRadioGroup,
   VStack,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import Image from "next/image";
@@ -44,6 +45,7 @@ export const PublishModal: React.FC<PublishModalProps> = ({
   isOpen,
   onClose,
 }) => {
+  const toast = useToast();
   const setMessage = useSetAtom(newMessageAtom);
   const { postMessage } = useMutateMessage();
   const [submitData, setSubmitData] = useState<SubmitData>(initialSubmitData);
@@ -104,9 +106,23 @@ export const PublishModal: React.FC<PublishModalProps> = ({
       onClose();
       if (!(err instanceof AxiosError)) return;
       if (err.response?.status === 429) {
-        console.error(err.message);
+        toast({
+          title:
+            "投稿できる回数の上限に達しました。時間をおいてもう一度お試しください",
+          description:
+            "たくさん投稿してくれてありがとうございます。とても嬉しいです。本当は無制限に投稿できるようにしたいんですけどね。そうするとお金がかかりすぎちゃって、ただでさえ薄い運営者の財布がnullになっちゃうんです。でも心配しないでください。10分くらい経ったらまた投稿できるようになります。その間YouTubeを見るとか、軽く運動するとか、ちょっとその辺を散歩してくるとかすればすぐです。そしたらこんなちっぽけなサイトの存在なんて忘れて、Twitterという古巣に戻っているかもしれないけど、はやくちで語りたいことができたらいつでも戻ってきてくださいね",
+          status: "error",
+          duration: null,
+          isClosable: true,
+        });
+        return;
       }
-      // 429以外の処理
+      toast({
+        title: "投稿できませんでした",
+        description: "エラーが発生しました。運営者にお問い合わせください",
+        status: "error",
+        duration: 3000,
+      });
     }
   };
 
