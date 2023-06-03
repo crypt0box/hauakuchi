@@ -24,6 +24,7 @@ import { CheckCircleIcon } from "@chakra-ui/icons";
 import { useMutateMessage } from "@/hooks/useMutateMessage";
 import { useSetAtom } from "jotai";
 import { newMessageAtom } from "@/atoms";
+import { AxiosError } from "axios";
 
 type PublishModalProps = Omit<ModalProps, "children">;
 
@@ -90,14 +91,23 @@ export const PublishModal: React.FC<PublishModalProps> = ({
 
   const onSubmit = async () => {
     const { icon, balloon, message } = submitData;
-    const res = await postMessage({ icon, balloon, message });
-    const newMessage = structuredClone({
-      ...submitData,
-      id: res.data.id,
-      created_at: new Date().toString(),
-    });
-    setMessage(newMessage);
-    onClose();
+    try {
+      const res = await postMessage({ icon, balloon, message });
+      const newMessage = structuredClone({
+        ...submitData,
+        id: res.data.id,
+        created_at: new Date().toString(),
+      });
+      setMessage(newMessage);
+      onClose();
+    } catch (err) {
+      onClose();
+      if (!(err instanceof AxiosError)) return;
+      if (err.response?.status === 429) {
+        console.error(err.message);
+      }
+      // 429以外の処理
+    }
   };
 
   const validateMessage = (message: string) => {
