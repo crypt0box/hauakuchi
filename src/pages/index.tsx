@@ -84,14 +84,7 @@ export default function Home() {
           )}
         </Box>
         <Action />
-        <Flex
-          w="full"
-          py={1}
-          justify="center"
-          gap={2}
-          bgColor="gray.300"
-          fontSize={14}
-        >
+        <Flex w="full" py={1} justify="center" gap={2} fontSize={14}>
           <Text>©2023</Text>
           <Link
             color="blue.500"
