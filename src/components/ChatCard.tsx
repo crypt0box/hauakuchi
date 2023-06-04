@@ -74,7 +74,23 @@ export const ChatCard: React.FC<ChatCardProps> = ({
       </button>
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
-        <ModalContent mx={{ base: "4" }}>
+        <ModalContent
+          mx={{ base: "4" }}
+          maxH="90vh"
+          overflowY="scroll"
+          css={
+            isLargerThan600 && {
+              "&::-webkit-scrollbar": {
+                width: "10px",
+              },
+              /* スクロールバーのつまみ（スクロールバーコントロール）を設定 */
+              "&::-webkit-scrollbar-thumb": {
+                backgroundColor: "rgba(0, 0, 0, 0.3)",
+                borderRadius: "10px",
+              },
+            }
+          }
+        >
           <ModalCloseButton />
           <ModalBody mt="8" pb="0">
             <Flex mb="4" justifyContent="center">
