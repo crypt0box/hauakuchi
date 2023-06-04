@@ -79,6 +79,7 @@ export default function Home() {
                 top={`${Math.floor(Math.random() * 80)}%`}
                 left={`${Math.floor(Math.random() * 80)}%`}
                 data={newMessage}
+                isMyMessage
               />
             </motion.div>
           )}

@@ -1,5 +1,6 @@
 import { MessageResponse } from "@/hooks/useFetchMessages";
 import { splitString } from "@/utils/splitString";
+import { CheckCircleIcon } from "@chakra-ui/icons";
 import {
   Button,
   Flex,
@@ -16,8 +17,6 @@ import {
   useMediaQuery,
   Box,
 } from "@chakra-ui/react";
-import { useSetAtom } from "jotai";
-import Head from "next/head";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { TypeAnimation } from "react-type-animation";
@@ -25,9 +24,14 @@ import { TwitterIntentTweet } from "./TwitterIntentTweet ";
 
 type ChatCardProps = {
   data: MessageResponse;
+  isMyMessage?: boolean;
 } & FlexProps;
 
-export const ChatCard: React.FC<ChatCardProps> = ({ data, ...rest }) => {
+export const ChatCard: React.FC<ChatCardProps> = ({
+  data,
+  isMyMessage,
+  ...rest
+}) => {
   const [isLargerThan600] = useMediaQuery("(min-width: 600px)");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [counter, setCounter] = useState(0);
@@ -50,6 +54,7 @@ export const ChatCard: React.FC<ChatCardProps> = ({ data, ...rest }) => {
     <>
       <button onClick={onOpen}>
         <Flex gap="2" {...rest}>
+          {isMyMessage && <CheckCircleIcon color="teal.400" />}
           <Image
             src={`https://twemoji.maxcdn.com/v/latest/svg/${data.icon}.svg`}
             alt={`感情アイコン_${data.icon}`}
@@ -124,18 +129,18 @@ export const ChatCard: React.FC<ChatCardProps> = ({ data, ...rest }) => {
             </Box>
           </ModalBody>
           <ModalFooter>
-          <Button
-            as={TwitterIntentTweet}
-            url={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${data.id}`}
-            hashtags={["めっちゃはやくちでしゃりべたい"]}
-            colorScheme="twitter"
-            mb="2"
-            w="calc(100vw * 0.9)"
-            maxW="400"
-            leftIcon={<ChakraImage w="6" h="6" src="/twitter.svg" />}
-          >
-            Twitterでシェアする
-          </Button>
+            <Button
+              as={TwitterIntentTweet}
+              url={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${data.id}`}
+              hashtags={["めっちゃはやくちでしゃりべたい"]}
+              colorScheme="twitter"
+              mb="2"
+              w="calc(100vw * 0.9)"
+              maxW="400"
+              leftIcon={<ChakraImage w="6" h="6" src="/twitter.svg" />}
+            >
+              Twitterでシェアする
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
