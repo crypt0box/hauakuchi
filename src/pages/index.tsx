@@ -87,13 +87,7 @@ export default function Home() {
         <Action />
         <Flex w="full" py={1} justify="center" gap={2} fontSize={14}>
           <Text>©2023</Text>
-          <Link
-            color="blue.500"
-            href="https://twitter.com/cryptooooon"
-            isExternal
-          >
-            @cryptobox
-          </Link>
+          <Text>created by @cryptobox</Text>
           <Link
             color="blue.500"
             href="https://docs.google.com/forms/d/e/1FAIpQLSfYg_D3axY6FS-eOi5apKakwcrxKX9sC6RN7oEKieXaaJahDA/viewform?usp=pp_url"
