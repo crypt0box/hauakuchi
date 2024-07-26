@@ -164,7 +164,7 @@ export const PublishModal: React.FC<PublishModalProps> = ({
                     <RadioChatType key={value} {...radio}>
                       <Flex w="full" justify="center" position="relative">
                         <Image
-                          src={`https://twemoji.maxcdn.com/v/latest/svg/${value}.svg`}
+                          src={`https://cdn.jsdelivr.net/gh/jdecked/twemoji@latest/assets/svg/${value}.svg`}
                           alt={`感情アイコン_${value}`}
                           width={32}
                           height={32}
@@ -196,7 +196,7 @@ export const PublishModal: React.FC<PublishModalProps> = ({
                     <RadioChatType key={value} {...radio}>
                       <Flex w="full" justify="center" position="relative">
                         <Image
-                          src={`https://twemoji.maxcdn.com/v/latest/svg/${value}.svg`}
+                          src={`https://cdn.jsdelivr.net/gh/jdecked/twemoji@latest/assets/svg/${value}.svg`}
                           alt={`チャットアイコン_${value}`}
                           width={32}
                           height={32}

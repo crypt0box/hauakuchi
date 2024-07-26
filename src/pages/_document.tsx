@@ -14,7 +14,7 @@ export default function Document() {
         />
         <link
           rel="icon"
-          href="https://twemoji.maxcdn.com/v/latest/svg/1f913.svg"
+          href="https://cdn.jsdelivr.net/gh/jdecked/twemoji@latest/assets/svg/1f913.svg"
         />
         <link
           href="https://fonts.googleapis.com/earlyaccess/nicomoji.css"

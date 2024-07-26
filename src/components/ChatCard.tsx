@@ -56,13 +56,13 @@ export const ChatCard: React.FC<ChatCardProps> = ({
         <Flex gap="2" {...rest}>
           {isMyMessage && <CheckCircleIcon color="teal.400" />}
           <Image
-            src={`https://twemoji.maxcdn.com/v/latest/svg/${data.icon}.svg`}
+            src={`https://cdn.jsdelivr.net/gh/jdecked/twemoji@latest/assets/svg/${data.icon}.svg`}
             alt={`感情アイコン_${data.icon}`}
             width={36}
             height={36}
           />
           <Image
-            src={`https://twemoji.maxcdn.com/v/latest/svg/${data.balloon}.svg`}
+            src={`https://cdn.jsdelivr.net/gh/jdecked/twemoji@latest/assets/svg/${data.balloon}.svg`}
             alt={`チャットアイコン_${data.balloon}`}
             width={36}
             height={36}
@@ -95,7 +95,7 @@ export const ChatCard: React.FC<ChatCardProps> = ({
           <ModalBody mt="8" pb="0">
             <Flex mb="4" justifyContent="center">
               <Image
-                src={`https://twemoji.maxcdn.com/v/latest/svg/${data.icon}.svg`}
+                src={`https://cdn.jsdelivr.net/gh/jdecked/twemoji@latest/assets/svg/${data.icon}.svg`}
                 alt={`感情アイコン_${data.icon}`}
                 width={32}
                 height={32}

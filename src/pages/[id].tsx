@@ -72,7 +72,7 @@ export default function MessagePage({ data }: { data: MessageResponse }) {
         >
           <Flex mb="4" justifyContent="center">
             <Image
-              src={`https://twemoji.maxcdn.com/v/latest/svg/${data.icon}.svg`}
+              src={`https://cdn.jsdelivr.net/gh/jdecked/twemoji@latest/assets/svg/${data.icon}.svg`}
               alt={`感情アイコン_${data.icon}`}
               width={32}
               height={32}
